@@ -24,15 +24,32 @@
     <!-- 注解配置 -->
     <context:annotation-config />
     <!-- 扫描注解包（如果在和spring集成的时候，也会扫描@service类，所以在此处应该排除扫描@service类） -->
-    <context:component-scan base-package="com.bsc.controller" />
+    <context:component-scan base-package="com.bsc" >
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
     <!--默认的mvc注解映射的支持（相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean） -->
     <mvc:annotation-driven/>
     <!-- （task任务扫描注解）支持异步方法执行 -->
     <task:annotation-driven /> 
+    
+    
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0" />
+            <property name="useExpiresHeader" value="true" />
+            <property name="useCacheControlHeader" value="true" />
+            <property name="useCacheControlNoStore" value="true" />
+            <property name="alwaysUseFullPath" value="true" />
+        </bean>
+    </mvc:interceptors>
 
     <!-- 视图解析器和json解析器 -->
     
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    	
+    	<!-- 在没有扩展名时即: "/user/1" 时的默认展现形式 -->
+        <property name="defaultContentType" value="text/html" />
         <property name="mediaTypes">
             <map>
                 <entry key="html" value="text/html"/>
@@ -45,6 +62,8 @@
                 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
                     <property name="prefix" value="/WEB-INF/views/" /> <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
                     <property name="suffix" value=".jsp"/>
+                    <property name="order" value="1" />
+                    <property name="contentType" value="text/html;charset=UTF-8"/>
                 </bean>
             </list>
         </property>
@@ -55,16 +74,97 @@
         </property>
     </bean>
     
-    <!-- 文件上传解析器 -->
+    <!-- 多视图解析 .json .xml -->
+    <!-- <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1" />
+        用于开启 /userinfo/123?format=json 的支持 默认是true
+        <property name="favorParameter" value="false" />
+        用于关闭 /userinfo/123.json 的支持 默认是true
+        <property name="favorPathExtension" value="true" />
+        设置为true以忽略对Accept Header的支持
+        <property name="ignoreAcceptHeader" value="true" />
+        在没有扩展名时即: "/user/1" 时的默认展现形式
+        <property name="defaultContentType" value="text/html" />
+        扩展名至mimeType的映射,即 /user.json => application/json
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+            </map>
+        </property>
+        <property name="defaultViews">
+            <list>
+              <ref bean="jsonView" />
+              <ref bean="xmlViewer" />
+            </list>
+        </property>
+    </bean> -->
+    
+    
+    <!-- 设置freeMarker的配置文件路径 -->
+    <!-- <bean id="freemarkerConfiguration"
+        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freemarker.properties" />
+    </bean> -->
+ 
+    <!-- 配置freeMarker的模板路径 -->
+    <!-- <bean id="freemarkerConfig"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="freemarkerSettings" ref="freemarkerConfiguration" />
+        <property name="templateLoaderPath">
+            <value>/</value>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape" />
+            </map>
+        </property>
+    </bean> -->
+ 
+    <!-- <bean id="freeMarkerView"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="order" value="2" />
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="prefix" value="WEB-INF/ftl/pages/" />
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html; charset=utf-8" />
+    </bean> -->
+    
+    <!-- 配置json解析器 -->
+    <!-- <bean name="jsonView"
+        class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+        <property name="encoding">
+            <value type="org.codehaus.jackson.JsonEncoding">UTF8</value>
+        </property>
+        <property name="extractValueFromSingleKeyModel" value="true"></property>
+        <property name="contentType" value="application/json;charset=UTF-8" />
+    </bean> -->
+    
+    <!-- 配置xml视图解析器 -->
+    <!-- <bean id="xmlViewer"
+        class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <constructor-arg>
+          <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+            <property name="classesToBeBound">
+                <list>
+                </list>
+            </property>
+          </bean>
+        </constructor-arg>
+        <property name="contentType" value="application/xml;charset=UTF-8" />
+    </bean> -->
+    
+    <!-- 文件上传解析器 -->  
     <bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- one of the properties available; the maximum file size in bytes -->
-        <property name="maxUploadSize" value="-1"/>
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--1024**1024*5即5M(如果value=-1,表示不限制大小)-->
+        <property name="maxUploadSize" value="5242880"/>
     </bean>
+    
 
     <!-- 总错误处理 -->
-    <bean id="exceptionResolver"
-        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView">
             <value>/error</value>
         </property>
@@ -72,10 +172,17 @@
             <value>500</value>
         </property>
         <property name="warnLogCategory">
-            <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
-            </value>
+            <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
+        </property>
+        <property name="exceptionMappings">
+            <props>
+                <!-- 映射目录为/WEB-INF/views/error/upload_error.jsp -->
+                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">/error/upload_error</prop>
+            </props>
         </property>
     </bean>
+
+	<mvc:view-controller path="/" view-name="redirect:/sys/index" />
 
 	<!-- 默认的处理器进行处理（静态资源因为没有相应的Controller就会被default servlet处理） -->
 	<mvc:default-servlet-handler/>
