@@ -22,7 +22,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
  */
 public class MyBatisRunScript {
 	
-	private static final String CONFIG_PATH = "sqlMapconfig.xml";
+	private static final String CONFIG_PATH = "generator.xml";
 	
 	public static void main(String[] args) {
 		generateMbgConfiguration();
