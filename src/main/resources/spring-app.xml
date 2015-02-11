@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd   
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+    http://www.springframework.org/schema/mvc   
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+  
+  <!-- 注解支持 -->
+  <context:annotation-config />
+  <!-- 数据库和事务配置 -->
+  <context:property-placeholder location="classpath:system-config.properties"/>
+  <!-- 自动扫描(自动注入) -->
+  <context:component-scan base-package="com.bsc" >
+  	<!-- <context:exclude-filter type="annotation" expression="com.bsc.controller"/> -->
+  </context:component-scan>
+
+  <!-- 数据源配置, 使用DruidDataSource 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="3" />
+		<property name="minIdle" value="3" />
+		<property name="maxActive" value="20" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+  
+  <!--  事务管理配置 -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+  </bean>
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes >
+      <tx:method name="add*" propagation="REQUIRED" />
+      <tx:method name="save*" propagation="REQUIRED" />
+      <tx:method name="insert*" propagation="REQUIRED" />
+      <tx:method name="delete*" propagation="REQUIRED" />
+      <tx:method name="update*" propagation="REQUIRED" />
+      <tx:method name="login*" propagation="REQUIRED" />
+      <tx:method name="regist*" propagation="REQUIRED" />
+      <tx:method name="*" read-only="true" />
+    </tx:attributes>
+  </tx:advice>
+  <aop:config >
+    <aop:pointcut expression="execution(* com.bsc.service.*.*(..))" id="service"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="service"/>
+  </aop:config>
+  
+  
+  <!-- 与mybatis集成  -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    
+    <!-- 以下为配置和spring整合的时候的配置，如果单独使用mybatis来操作，需要在mybatis-config中进行配置typealias和mappers属性 -->
+    <property name="typeAliasesPackage" value="com.bsc.entity"/>
+    <property name="mapperLocations" value="classpath:com/bsc/dao/impl/*.xml"></property>
+  </bean>
+  
+  
+  
+  <!-- scope=prototype  保证每次操作都会产生一个模板（线程安全的）和单例对应（线程不安全） -->
+  <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype" >
+    <constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+  </bean>
+  
+ <!--  <bean id="sqlSession" class="org.mybatis.spring.support.SqlSessionDaoSupport">
+  	<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+  </bean> -->
+  
+  <bean id="commonDao" class="com.bsc.common.CommonDao">
+    <property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+  </bean>
+  
+  
+  
+</beans>

@@ -1,0 +1,5 @@
+com\bsc\service\UserService.class
+com\bsc\service\impl\UserServiceImpl.class
+com\bsc\generator\RunScript.class
+com\bsc\dao\UserMapper.class
+com\bsc\entity\User.class
