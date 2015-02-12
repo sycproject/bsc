@@ -1,0 +1,52 @@
+<!-- #{}表示参数化输出，${}表示直接输出不进行任何转义操作，自己进行转移 -->
+
+<select id="getListByPagenate" parameterType="PagenateArgs"
+    resultType="Visitor">
+    select * from (
+    <include refid="getListSql" /> <include refid="orderBySql"/>
+    ) t <!-- #{}表示参数化输出，${}表示直接输出不进行任何转义操作，自己进行转移 -->
+    <if test="pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+</select>
+<sql id="getListSql">
+    select * from Visitor where
+    status>0
+</sql>
+<sql id="orderBySql">
+    order by ${orderFieldStr} ${orderDirectionStr}
+</sql>
+
+
+where if 
+
+<select id="findActiveBlogLike"
+     resultType="Blog">
+  SELECT * FROM BLOG
+  WHERE
+  <if test="state != null">
+    state = #{state}
+  </if>
+  <if test="title != null">
+    AND title like #{title}
+  </if>
+  <if test="author != null and author.name != null">
+    AND author_name like #{author.name}
+  </if>
+</select>
+
+
+for each
+
+
+<sql id="getListSqlConditions">
+        select * from Visitor
+    </sql>
+    <!-- Foreach循环条件 -->
+    <select id="getListForeachDemo" resultMap="visitorRs">
+        <include refid="getListSqlConditions"/>
+        where status>0 and id in 
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            ${item}
+        </foreach>
+    </select>
