@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="<%=request.getContextPath() %>"></c:set>
+<%@ include file="/WEB-INF/views/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -104,9 +103,9 @@
 
 				<ul class="nav nav-list">
 					<li class="">
-						<a data-url="page/index" href="${ctx }/sys/index/toUrl?page=index">
+						<a data-url="page/welcome" href="${ctx }/sys/index/toUrl#page/welcome">
 							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text"> 首页 </span>
 						</a>
 
 						<b class="arrow"></b>
@@ -115,7 +114,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-desktop"></i>
-							<span class="menu-text"> UI &amp; Elements </span>
+							<span class="menu-text"> 系统管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -124,16 +123,16 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a data-url="page/typography" href="ajax.html#page/typography">
+								<a data-url="page/user" href="${ctx }/sys/index/toUrl#page/user">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Typography
+									用户管理
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
 							<li class="">
-								<a data-url="page/elements" href="ajax.html#page/elements">
+								<a data-url="page/elements" href="${ctx }/sys/index/toUrl#page/elements">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Elements
 								</a>
@@ -142,7 +141,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/buttons" href="ajax.html#page/buttons">
+								<a data-url="page/buttons" href="${ctx }/sys/index/toUrl#page/buttons">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Buttons &amp; Icons
 								</a>
@@ -151,7 +150,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/treeview" href="ajax.html#page/treeview">
+								<a data-url="page/treeview" href="${ctx }/sys/index/toUrl#page/treeview">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Treeview
 								</a>
@@ -160,7 +159,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/nestable-list" href="ajax.html#page/nestable-list">
+								<a data-url="page/nestable-list" href="${ctx }/sys/index/toUrl#page/nestable-list">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Nestable Lists
 								</a>
@@ -235,7 +234,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a data-url="page/tables" href="ajax.html#page/tables">
+								<a data-url="page/tables" href="${ctx }/sys/index/toUrl#page/tables">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Simple &amp; Dynamic
 								</a>
@@ -244,7 +243,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/jqgrid" href="ajax.html#page/jqgrid">
+								<a data-url="page/jqgrid" href="${ctx }/sys/index/toUrl#page/jqgrid">
 									<i class="menu-icon fa fa-caret-right"></i>
 									jqGrid plugin
 								</a>
@@ -266,7 +265,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a data-url="page/form-elements" href="ajax.html#page/form-elements">
+								<a data-url="page/form-elements" href="${ctx }/sys/index/toUrl#page/form-elements">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Form Elements
 								</a>
@@ -275,7 +274,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/form-wizard" href="ajax.html#page/form-wizard">
+								<a data-url="page/form-wizard" href="${ctx }/sys/index/toUrl#page/form-wizard">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Wizard &amp; Validation
 								</a>
@@ -284,7 +283,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/wysiwyg" href="ajax.html#page/wysiwyg">
+								<a data-url="page/wysiwyg" href="${ctx }/sys/index/toUrl#page/wysiwyg">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Wysiwyg &amp; Markdown
 								</a>
@@ -293,7 +292,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/dropzone" href="ajax.html#page/dropzone">
+								<a data-url="page/dropzone" href="${ctx }/sys/index/toUrl#page/dropzone">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Dropzone File Upload
 								</a>
@@ -304,7 +303,7 @@
 					</li>
 
 					<li class="">
-						<a data-url="page/widgets" href="ajax.html#page/widgets">
+						<a data-url="page/widgets" href="${ctx }/sys/index/toUrl#page/widgets">
 							<i class="menu-icon fa fa-list-alt"></i>
 							<span class="menu-text"> Widgets </span>
 						</a>
@@ -313,7 +312,7 @@
 					</li>
 
 					<li class="">
-						<a data-url="page/calendar" href="ajax.html#page/calendar">
+						<a data-url="page/calendar" href="${ctx }/sys/index/toUrl#page/calendar">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
@@ -332,7 +331,7 @@
 					</li>
 
 					<li class="">
-						<a data-url="page/gallery" href="ajax.html#page/gallery">
+						<a data-url="page/gallery" href="${ctx }/sys/index/toUrl#page/gallery">
 							<i class="menu-icon fa fa-picture-o"></i>
 							<span class="menu-text"> Gallery </span>
 						</a>
@@ -352,7 +351,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a data-url="page/profile" href="ajax.html#page/profile">
+								<a data-url="page/profile" href="${ctx }/sys/index/toUrl#page/profile">
 									<i class="menu-icon fa fa-caret-right"></i>
 									User Profile
 								</a>
@@ -361,7 +360,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/inbox" href="ajax.html#page/inbox">
+								<a data-url="page/inbox" href="${ctx }/sys/index/toUrl#page/inbox">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Inbox
 								</a>
@@ -370,7 +369,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/pricing" href="ajax.html#page/pricing">
+								<a data-url="page/pricing" href="${ctx }/sys/index/toUrl#page/pricing">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Pricing Tables
 								</a>
@@ -379,7 +378,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/invoice" href="ajax.html#page/invoice">
+								<a data-url="page/invoice" href="${ctx }/sys/index/toUrl#page/invoice">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Invoice
 								</a>
@@ -388,7 +387,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/timeline" href="ajax.html#page/timeline">
+								<a data-url="page/timeline" href="${ctx }/sys/index/toUrl#page/timeline">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Timeline
 								</a>
@@ -397,7 +396,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/email" href="ajax.html#page/email">
+								<a data-url="page/email" href="${ctx }/sys/index/toUrl#page/email">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Email Templates
 								</a>
@@ -436,7 +435,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a data-url="page/faq" href="ajax.html#page/faq">
+								<a data-url="page/faq" href="${ctx }/sys/index/toUrl#page/faq">
 									<i class="menu-icon fa fa-caret-right"></i>
 									FAQ
 								</a>
@@ -445,7 +444,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/error-404" href="ajax.html#page/error-404">
+								<a data-url="page/error-404" href="${ctx }/sys/index/toUrl#page/error-404">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Error 404
 								</a>
@@ -454,7 +453,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/error-500" href="ajax.html#page/error-500">
+								<a data-url="page/error-500" href="${ctx }/sys/index/toUrl#page/error-500">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Error 500
 								</a>
@@ -463,7 +462,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/grid" href="ajax.html#page/grid">
+								<a data-url="page/grid" href="${ctx }/sys/index/toUrl#page/grid">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Grid
 								</a>
@@ -472,7 +471,7 @@
 							</li>
 
 							<li class="">
-								<a data-url="page/blank" href="ajax.html#page/blank">
+								<a data-url="page/blank" href="${ctx }/sys/index/toUrl#page/blank">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Blank Page
 								</a>
@@ -505,7 +504,7 @@
 					<ul class="breadcrumb">
 						<li>
 							<i class="ace-icon fa fa-home home-icon"></i>
-							<a href="#">Home</a>
+							<a href="#">主页</a>
 						</li>
 					</ul><!-- /.breadcrumb -->
 
@@ -623,7 +622,7 @@
 			<div class="footer">
 				<div class="footer-inner">
 					<!-- #section:basics/footer -->
-					<%@ include file="top.jsp" %>
+					<%@ include file="footer.jsp" %>
 					<!-- /section:basics/footer -->
 				</div>
 			</div>
@@ -657,29 +656,21 @@
 		<script src="${ctx}/ui/assets/js/ace.min.js"></script>
 		<script type="text/javascript">
 			//Load content via ajax
-					jQuery(function($) {
-					  if('enable_ajax_content' in ace) {
-						var options = {
-						  content_url: function(url) {
-							//this is for Ace demo only, you should change it
-							//please refer to documentation for more info
-						
-							if(!url.match(/^page\//)) return false;
-							
+			jQuery(function($) {
+				if ('enable_ajax_content' in ace) {
+					var options = {
+						content_url : function(url) {
+
+							if (!url.match(/^page\//)) return false;
 							var path = document.location.pathname;
-							
-							//for Ace HTML demo version, convert ajax.html#page/gallery to > gallery.html and load it
-							if(path.match(/ajax\.html/)) return path.replace(/ajax\.html/, url.replace(/^page\//, '')+'.html') ;
-					
-							//for Ace PHP demo version convert "page/dashboard" to "?page=dashboard" and load it
-							return path + "?" + url.replace(/\//, "=");
-						  },
-						  default_url: '${ctx}/views/index.html'//default url
-						};
-						ace.enable_ajax_content($, options);
-					  }
-					    
-					});
+							path = path + "?" + url.replace(/\//, "=");
+							return path;
+						},
+						default_url : 'page/welcome'
+					};
+					ace.enable_ajax_content($, options);
+				}
+			});
 		</script>
 	</body>
 </html>

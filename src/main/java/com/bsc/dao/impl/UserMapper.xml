@@ -9,9 +9,56 @@
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="gender" property="gender" jdbcType="CHAR" />
   </resultMap>
+  
+  <!-- 字段 -->
   <sql id="Base_Column_List" >
     id, name, pass, address, age, gender
   </sql>
+  
+  <!-- 排序 -->
+  <sql id="orderBySql">
+    order by ${orderCol} ${orderReg}
+  </sql>
+  
+  <!-- 分页 -->
+  <sql id="limitBySql">
+  	LIMIT #{startIndex},#{pageSize}
+  </sql>
+  
+  <select id="getList" resultMap="BaseResultMap" parameterType="hashmap">
+  	select * from tb_user where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="pass != null">
+			and pass = #{pass}
+		</if>
+		<if test="address != null">
+			and address = #{address}
+		</if>
+	<include refid="orderBySql" />
+  </select>
+  
+  <select id="getListByPage" resultMap="BaseResultMap" parameterType="hashmap">
+  	select * from tb_user where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="pass != null">
+			and pass = #{pass}
+		</if>
+		<if test="address != null">
+			and address = #{address}
+		</if>
+	<include refid="orderBySql" />
+	<include refid="limitBySql" />
+  </select>
   
   <select id="selectByEntity" resultMap="BaseResultMap" >
     select 

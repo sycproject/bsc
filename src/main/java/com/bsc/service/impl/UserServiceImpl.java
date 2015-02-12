@@ -1,5 +1,8 @@
 package com.bsc.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -34,19 +37,24 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		commonDao.update("com.bsc.dao.UserMapper.updateByPrimaryKey", user);
-		/*try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}*/
-		//int i = 10/0;
-		//System.out.println(i);
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
 		commonDao.delete("com.bsc.dao.UserMapper.deleteByPrimaryKey", user.getId());
+	}
+
+	@Override
+	public List<User> getListByPage(Map<String, Object> searchCondition) {
+		// TODO Auto-generated method stub
+		return commonDao.getList("com.bsc.dao.UserMapper.getListByPage", searchCondition);
+	}
+
+	@Override
+	public int getTotalCount(Map<String, Object> searchCondition) {
+		// TODO Auto-generated method stub
+		return commonDao.getList("com.bsc.dao.UserMapper.getList", searchCondition).size();
 	}
 
 }

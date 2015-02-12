@@ -32,6 +32,12 @@
         <mapper resource="com/bsc/dao/impl/UserMapper.xml" />  
     </mappers>   -->
     
+    <plugins>
+		<!-- 上线时关闭，调试的时候打印SQL使用。插件顺序不要调换 -->
+		<plugin interceptor="com.bsc.interceptor.SQLInterceptor"/>
+		
+	</plugins>
+    
     
 	
 	
