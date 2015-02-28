@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsc.dao.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.bsc.entity.Resources" >
+    <id column="ids" property="ids" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="osname" property="osname" jdbcType="VARCHAR" />
+    <result column="ips" property="ips" jdbcType="VARCHAR" />
+    <result column="hostname" property="hostname" jdbcType="VARCHAR" />
+    <result column="cpunumber" property="cpunumber" jdbcType="BIGINT" />
+    <result column="cpuratio" property="cpuratio" jdbcType="DECIMAL" />
+    <result column="phymemory" property="phymemory" jdbcType="BIGINT" />
+    <result column="phyfreememory" property="phyfreememory" jdbcType="BIGINT" />
+    <result column="jvmtotalmemory" property="jvmtotalmemory" jdbcType="BIGINT" />
+    <result column="jvmfreememory" property="jvmfreememory" jdbcType="BIGINT" />
+    <result column="jvmmaxmemory" property="jvmmaxmemory" jdbcType="BIGINT" />
+    <result column="gccount" property="gccount" jdbcType="BIGINT" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ids, version, osname, ips, hostname, cpunumber, cpuratio, phymemory, phyfreememory, 
+    jvmtotalmemory, jvmfreememory, jvmmaxmemory, gccount, createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_resources
+    where ids = #{ids,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_resources
+    where ids = #{ids,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bsc.entity.Resources" >
+    insert into tb_resources (ids, version, osname, 
+      ips, hostname, cpunumber, 
+      cpuratio, phymemory, phyfreememory, 
+      jvmtotalmemory, jvmfreememory, jvmmaxmemory, 
+      gccount, createdate)
+    values (#{ids,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, #{osname,jdbcType=VARCHAR}, 
+      #{ips,jdbcType=VARCHAR}, #{hostname,jdbcType=VARCHAR}, #{cpunumber,jdbcType=BIGINT}, 
+      #{cpuratio,jdbcType=DECIMAL}, #{phymemory,jdbcType=BIGINT}, #{phyfreememory,jdbcType=BIGINT}, 
+      #{jvmtotalmemory,jdbcType=BIGINT}, #{jvmfreememory,jdbcType=BIGINT}, #{jvmmaxmemory,jdbcType=BIGINT}, 
+      #{gccount,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsc.entity.Resources" >
+    insert into tb_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ids != null" >
+        ids,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="osname != null" >
+        osname,
+      </if>
+      <if test="ips != null" >
+        ips,
+      </if>
+      <if test="hostname != null" >
+        hostname,
+      </if>
+      <if test="cpunumber != null" >
+        cpunumber,
+      </if>
+      <if test="cpuratio != null" >
+        cpuratio,
+      </if>
+      <if test="phymemory != null" >
+        phymemory,
+      </if>
+      <if test="phyfreememory != null" >
+        phyfreememory,
+      </if>
+      <if test="jvmtotalmemory != null" >
+        jvmtotalmemory,
+      </if>
+      <if test="jvmfreememory != null" >
+        jvmfreememory,
+      </if>
+      <if test="jvmmaxmemory != null" >
+        jvmmaxmemory,
+      </if>
+      <if test="gccount != null" >
+        gccount,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ids != null" >
+        #{ids,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="osname != null" >
+        #{osname,jdbcType=VARCHAR},
+      </if>
+      <if test="ips != null" >
+        #{ips,jdbcType=VARCHAR},
+      </if>
+      <if test="hostname != null" >
+        #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpunumber != null" >
+        #{cpunumber,jdbcType=BIGINT},
+      </if>
+      <if test="cpuratio != null" >
+        #{cpuratio,jdbcType=DECIMAL},
+      </if>
+      <if test="phymemory != null" >
+        #{phymemory,jdbcType=BIGINT},
+      </if>
+      <if test="phyfreememory != null" >
+        #{phyfreememory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmtotalmemory != null" >
+        #{jvmtotalmemory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmfreememory != null" >
+        #{jvmfreememory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmmaxmemory != null" >
+        #{jvmmaxmemory,jdbcType=BIGINT},
+      </if>
+      <if test="gccount != null" >
+        #{gccount,jdbcType=BIGINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsc.entity.Resources" >
+    update tb_resources
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="osname != null" >
+        osname = #{osname,jdbcType=VARCHAR},
+      </if>
+      <if test="ips != null" >
+        ips = #{ips,jdbcType=VARCHAR},
+      </if>
+      <if test="hostname != null" >
+        hostname = #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpunumber != null" >
+        cpunumber = #{cpunumber,jdbcType=BIGINT},
+      </if>
+      <if test="cpuratio != null" >
+        cpuratio = #{cpuratio,jdbcType=DECIMAL},
+      </if>
+      <if test="phymemory != null" >
+        phymemory = #{phymemory,jdbcType=BIGINT},
+      </if>
+      <if test="phyfreememory != null" >
+        phyfreememory = #{phyfreememory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmtotalmemory != null" >
+        jvmtotalmemory = #{jvmtotalmemory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmfreememory != null" >
+        jvmfreememory = #{jvmfreememory,jdbcType=BIGINT},
+      </if>
+      <if test="jvmmaxmemory != null" >
+        jvmmaxmemory = #{jvmmaxmemory,jdbcType=BIGINT},
+      </if>
+      <if test="gccount != null" >
+        gccount = #{gccount,jdbcType=BIGINT},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ids = #{ids,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsc.entity.Resources" >
+    update tb_resources
+    set version = #{version,jdbcType=BIGINT},
+      osname = #{osname,jdbcType=VARCHAR},
+      ips = #{ips,jdbcType=VARCHAR},
+      hostname = #{hostname,jdbcType=VARCHAR},
+      cpunumber = #{cpunumber,jdbcType=BIGINT},
+      cpuratio = #{cpuratio,jdbcType=DECIMAL},
+      phymemory = #{phymemory,jdbcType=BIGINT},
+      phyfreememory = #{phyfreememory,jdbcType=BIGINT},
+      jvmtotalmemory = #{jvmtotalmemory,jdbcType=BIGINT},
+      jvmfreememory = #{jvmfreememory,jdbcType=BIGINT},
+      jvmmaxmemory = #{jvmmaxmemory,jdbcType=BIGINT},
+      gccount = #{gccount,jdbcType=BIGINT},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where ids = #{ids,jdbcType=VARCHAR}
+  </update>
+</mapper>
