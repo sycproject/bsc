@@ -28,6 +28,9 @@
   	<!-- 排除扫描@controller类，因为在spring-mvc中已经被扫描过了 -->
   	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
   </context:component-scan>
+  
+  <!-- （task任务扫描注解）支持异步方法执行 -->
+  <task:annotation-driven />
 
   <!-- 数据源配置, 使用DruidDataSource 数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -67,6 +70,7 @@
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource"></property>
   </bean>
+  
   <tx:advice id="txAdvice" transaction-manager="transactionManager">
     <tx:attributes >
       <tx:method name="add*" propagation="REQUIRED" />

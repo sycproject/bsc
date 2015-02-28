@@ -38,6 +38,10 @@
 		<script src="${ctx}/ui/assets/js/html5shiv.js"></script>
 		<script src="${ctx}/ui/assets/js/respond.min.js"></script>
 		<![endif]-->
+		
+		<!-- The fav icon -->
+		<link rel="icon" href="${ctx}/static/images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${ctx}/static/images/favicon.ico" type="image/x-icon" />
 	</head>
 
 	<body class="no-skin">

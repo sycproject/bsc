@@ -50,3 +50,10 @@ for each
             ${item}
         </foreach>
     </select>
+    
+    
+    
+    参考：
+    http://limingnihao.iteye.com/blog/782190
+    
+    ${columnName} like '%#{sSearch}%'

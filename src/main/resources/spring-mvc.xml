@@ -5,7 +5,6 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop" 
     xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:task="http://www.springframework.org/schema/task"
     xsi:schemaLocation="http://www.springframework.org/schema/beans    
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
     http://www.springframework.org/schema/tx    
@@ -15,22 +14,18 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
     http://www.springframework.org/schema/mvc   
-    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-    http://www.springframework.org/schema/task
-    http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- Spring MVC配置 -->
     
-    <!-- 注解配置 -->
+    <!-- 默认的注解映射的支持 -->
     <context:annotation-config />
     <!-- 扫描注解包（如果在和spring集成的时候，也会扫描@service类，所以在此处应该排除扫描@service类） -->
     <context:component-scan base-package="com.bsc" >
     	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
     <!--默认的mvc注解映射的支持（相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean） -->
-    <mvc:annotation-driven/>
-    <!-- （task任务扫描注解）支持异步方法执行 -->
-    <task:annotation-driven /> 
+    <mvc:annotation-driven/> 
     
     
     <!-- 配置拦截器 -->
@@ -44,7 +39,7 @@
         </bean>
     </mvc:interceptors>
 
-    <!-- 视图解析器和json解析器 -->
+    <!-- 视图解析器和json解析器(多视图解析器) -->
     
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     	
@@ -166,11 +161,12 @@
     <!-- 总错误处理 -->
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView">
-            <value>/error</value>
+            <value>/error/error</value>
         </property>
         <property name="defaultStatusCode">
             <value>500</value>
         </property>
+        <!-- 全局异常记录到日志中，在log4j的配置文件中还要加入log4j.logger.org.springframework.web.servlet.handler.SimpleMappingExceptionResolver=WARN -->
         <property name="warnLogCategory">
             <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
         </property>

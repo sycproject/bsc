@@ -26,11 +26,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
-		if(user.getId() != null){
-			commonDao.save("com.bsc.dao.UserMapper.insert", user);
-		}else{
-			commonDao.update("com.bsc.dao.UserMapper.updateByPrimaryKey", user);
-		}
+		commonDao.save("com.bsc.dao.UserMapper.insert", user);
 	}
 
 	@Override
