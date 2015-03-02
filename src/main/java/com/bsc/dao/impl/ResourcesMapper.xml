@@ -43,7 +43,7 @@
       #{jvmtotalmemory,jdbcType=BIGINT}, #{jvmfreememory,jdbcType=BIGINT}, #{jvmmaxmemory,jdbcType=BIGINT}, 
       #{gccount,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.bsc.entity.Resources" >
+  <insert id="insertSelective" parameterType="com.bsc.entity.Resources" useGeneratedKeys="true" >
     insert into tb_resources
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ids != null" >
