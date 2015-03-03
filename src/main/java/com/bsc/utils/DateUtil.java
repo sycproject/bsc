@@ -1,6 +1,7 @@
 package com.bsc.utils;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -191,6 +192,67 @@ public class DateUtil {
 		Assert.notNull(currentDate);
 		String strDateTime = date2String(currentDate,"yyyy-MM-dd") + " 59:59:59";
 		return string2Date(strDateTime,"yyyy-MM-dd hh:mm:ss");
+	}
+	
+	/**
+	 * 获取开始时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date startDateByHour(Date start, int end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(start); 
+		calendar.set(Calendar.MINUTE, end);   
+		Date date = calendar.getTime();
+		return date;
+	}
+	
+	/**
+	 * 获取结束时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date endDateByHour(Date end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(end); 
+		calendar.set(Calendar.SECOND, 59);   
+		calendar.set(Calendar.MILLISECOND, 999);   
+		Date date = calendar.getTime();
+		return date;
+	}
+	
+	/**
+	 * 数据库只认java.sql.*
+	 * @param date
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(Date date){
+		if(null == date){
+			date = new Date();
+		}
+		return getSqlTimestamp(date.getTime());
+	}
+
+	/**
+	 * 数据库只认java.sql.*
+	 * @param time
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(long time){
+		return new java.sql.Timestamp(time);
+	}
+	
+	/**
+	 * 格式化
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static String format(Date date, String pattern) {
+		DateFormat format = new SimpleDateFormat(pattern);
+		return format.format(date);
 	}
 	
 	public static void main(String[] args){

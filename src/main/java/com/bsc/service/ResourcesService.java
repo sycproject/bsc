@@ -1,5 +1,7 @@
 package com.bsc.service;
 
+import java.util.Map;
+
 import com.bsc.entity.Resources;
 
 public interface ResourcesService {
@@ -11,4 +13,6 @@ public interface ResourcesService {
 	public void updateResources(Resources resources);
 	
 	public void deleteResources(Resources resources);
+
+	public Map<String, Object> getResources();
 }

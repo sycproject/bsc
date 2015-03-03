@@ -21,6 +21,23 @@
     ids, version, osname, ips, hostname, cpunumber, cpuratio, phymemory, phyfreememory, 
     jvmtotalmemory, jvmfreememory, jvmmaxmemory, gccount, createdate
   </sql>
+  
+  <!-- 查询当天所有记录 -->
+  <select id="getResourcesList" resultMap="BaseResultMap" parameterType="hashmap">
+  	select 
+    <include refid="Base_Column_List" />
+    from tb_resources
+    <where>
+		<if test="hostname != null">
+			hostname = #{hostname}
+		</if>
+		<if test="startDate != null and endDate != null">
+			and createdate between #{startDate} and #{endDate}
+		</if>
+	</where>
+	order by createdate asc
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
