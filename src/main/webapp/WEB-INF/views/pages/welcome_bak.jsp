@@ -18,94 +18,28 @@
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
-		<!-- <div class="row">
-			<div class="col-xs-12 col-sm-12 widget-container-col">
-				<div class="widget-box">
-					<div class="widget-header widget-header-flat">
-						<h4 class="widget-title lighter">
-							<i class="ace-icon fa fa-bar-chart-o orange"></i>
-							<span id="chart-title">系统负载情况</span>
-						</h4>
 		
-						<div class="widget-toolbar">
-							<a href="#" data-action="fullscreen" class="orange2">
-								<i class="ace-icon fa fa-expand"></i>
-							</a>
-							<a href="#" data-action="reload">
-								<i class="ace-icon fa fa-refresh"></i>
-							</a>
-							<a href="#" data-action="collapse">
-								<i class="ace-icon fa fa-chevron-up"></i>
-							</a>
-		
-							<a href="#" data-action="close">
-								<i class="ace-icon fa fa-times"></i>
-							</a>
-						</div>
-					</div>
-		
-					<div class="widget-body">
-						<div class="widget-main padding-4">
-							
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="widget-box transparent" id="recent-box">
-										<div class="widget-header">
-											<h4 class="widget-title lighter smaller">
-												<i class="ace-icon fa fa-rss orange"></i>系统负载
-											</h4>
-					
-											<div class="widget-toolbar no-border">
-												<ul class="nav nav-tabs" id="recent-tab">
-													
-													<li class="active">
-														<a data-toggle="tab" href="#info-tab">Info</a>
-													</li>
-													
-													<li>
-														<a data-toggle="tab" href="#cpu-tab">CPU</a>
-													</li>
-					
-													<li>
-														<a data-toggle="tab" href="#phymemory-tab">物理内存</a>
-													</li>
-					
-													<li>
-														<a data-toggle="tab" href="#jvmmemory-tab">JVM内存</a>
-													</li>
-												</ul>
-											</div>					
-										</div>
-										
-										<div class="widget-body">
-											<div class="widget-main padding-4">
-												<div class="tab-content padding-8">
-													<div id="info-tab" class="tab-pane active">
-														<div id="container_info"></div>
-													</div>
-													<div id="cpu-tab" class="tab-pane">
-														<div id="container_cpu" style="width: 80%"></div>
-													</div>
-													<div id="phymemory-tab" class="tab-pane">
-														<div id="container_phymemory" style="width: 80%"></div>
-													</div>
-													<div id="jvmmemory-tab" class="tab-pane">
-														<div id="container_jvmmemory" style="width: 80%"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-					</div>
+		<!-- <div class="widget-box transparent">
+			<div class="widget-header widget-header-flat">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-bar-chart-o"></i>
+					<span id="chart-title">设备使用情况</span>
+				</h4>
+				<div class="widget-toolbar">
+					<a href="#" onclick="requestData();" data-action="reload">
+						<i class="ace-icon fa fa-refresh"></i>
+					</a>
+					<a href="#" data-action="collapse">
+						<i class="ace-icon fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main padding-4">
+					<div id="container"></div>
 				</div>
 			</div>
 		</div> -->
-		
-		
 		
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 widget-container-col">
@@ -113,7 +47,7 @@
 					<div class="widget-header widget-header-flat">
 						<h4 class="widget-title lighter">
 							<i class="ace-icon fa fa-bar-chart-o"></i>
-							<span id="chart-title">CPU资源使用情况</span>
+							<span id="chart-title">系统负载情况</span>
 						</h4>
 		
 						<div class="widget-toolbar">
@@ -147,7 +81,7 @@
 					<div class="widget-header widget-header-flat">
 						<h4 class="widget-title lighter">
 							<i class="ace-icon fa fa-bar-chart-o"></i>
-							<span id="chart-title">物理内存使用情况</span>
+							<span id="chart-title">系统负载情况</span>
 						</h4>
 		
 						<div class="widget-toolbar">
@@ -181,7 +115,7 @@
 					<div class="widget-header widget-header-flat">
 						<h4 class="widget-title lighter">
 							<i class="ace-icon fa fa-bar-chart-o"></i>
-							<span id="chart-title">JVM使用情况</span>
+							<span id="chart-title">系统负载情况</span>
 						</h4>
 		
 						<div class="widget-toolbar">
@@ -291,7 +225,7 @@
 	            }]
 	        },
 	        tooltip: {
-	           /*  headerFormat: '<b>时间：{point.x}</b><br />', */
+	            valueSuffix: '°C',
 	            pointFormat: 'CPU使用量 : <b>{point.y:1f}</b>'
 	        },
 	        legend: {

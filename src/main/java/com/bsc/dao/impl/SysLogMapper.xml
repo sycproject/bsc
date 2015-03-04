@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsc.dao.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.bsc.entity.SysLog" >
+    <id column="ids" property="ids" jdbcType="VARCHAR" />
+    <result column="loginName" property="loginname" jdbcType="VARCHAR" />
+    <result column="ipAddress" property="ipaddress" jdbcType="VARCHAR" />
+    <result column="contextPath" property="contextpath" jdbcType="VARCHAR" />
+    <result column="requestPath" property="requestpath" jdbcType="VARCHAR" />
+    <result column="requestMethod" property="requestmethod" jdbcType="VARCHAR" />
+    <result column="methodName" property="methodname" jdbcType="VARCHAR" />
+    <result column="methodRemark" property="methodremark" jdbcType="VARCHAR" />
+    <result column="packagePath" property="packagepath" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="costTime" property="costtime" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ids, loginName, ipAddress, contextPath, requestPath, requestMethod, methodName, methodRemark, 
+    packagePath, startTime, endTime, costTime
+  </sql>
+  
+  <!-- 排序 -->
+  <sql id="orderBySql">
+    order by ${orderCol} ${orderReg}
+  </sql>
+  
+  <!-- 分页 -->
+  <sql id="limitBySql">
+  	LIMIT #{startIndex},#{pageSize}
+  </sql>
+  
+   <select id="getList" resultMap="BaseResultMap" parameterType="hashmap">
+  	select * from tb_syslog where 1=1
+		<if test="ids != null">
+			and ids = #{ids}
+		</if>
+		<if test="loginName != null">
+			and loginName = #{loginName}
+		</if>
+		<if test="ipAddress != null">
+			and ipAddress = #{ipAddress}
+		</if>
+		<if test="requestMethod != null">
+			and requestMethod = #{requestMethod}
+		</if>
+	<include refid="orderBySql" />
+  </select>
+  
+  <select id="getListByPage" resultMap="BaseResultMap" parameterType="hashmap">
+  	select * from tb_syslog where 1=1
+		<if test="ids != null">
+			and ids = #{ids}
+		</if>
+		<if test="loginName != null">
+			and loginName = #{loginName}
+		</if>
+		<if test="ipAddress != null">
+			and ipAddress = #{ipAddress}
+		</if>
+		<if test="requestMethod != null">
+			and requestMethod = #{requestMethod}
+		</if>
+	<include refid="orderBySql" />
+	<include refid="limitBySql" />
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_syslog
+    where ids = #{ids,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_syslog
+    where ids = #{ids,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bsc.entity.SysLog" >
+    insert into tb_syslog (ids, loginName, ipAddress, 
+      contextPath, requestPath, requestMethod, 
+      methodName, methodRemark, packagePath, 
+      startTime, endTime, costTime
+      )
+    values (#{ids,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR}, 
+      #{contextpath,jdbcType=VARCHAR}, #{requestpath,jdbcType=VARCHAR}, #{requestmethod,jdbcType=VARCHAR}, 
+      #{methodname,jdbcType=VARCHAR}, #{methodremark,jdbcType=VARCHAR}, #{packagepath,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{costtime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsc.entity.SysLog" >
+    insert into tb_syslog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ids != null" >
+        ids,
+      </if>
+      <if test="loginname != null" >
+        loginName,
+      </if>
+      <if test="ipaddress != null" >
+        ipAddress,
+      </if>
+      <if test="contextpath != null" >
+        contextPath,
+      </if>
+      <if test="requestpath != null" >
+        requestPath,
+      </if>
+      <if test="requestmethod != null" >
+        requestMethod,
+      </if>
+      <if test="methodname != null" >
+        methodName,
+      </if>
+      <if test="methodremark != null" >
+        methodRemark,
+      </if>
+      <if test="packagepath != null" >
+        packagePath,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="costtime != null" >
+        costTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ids != null" >
+        #{ids,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contextpath != null" >
+        #{contextpath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestpath != null" >
+        #{requestpath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null" >
+        #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null" >
+        #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodremark != null" >
+        #{methodremark,jdbcType=VARCHAR},
+      </if>
+      <if test="packagepath != null" >
+        #{packagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costtime != null" >
+        #{costtime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsc.entity.SysLog" >
+    update tb_syslog
+    <set >
+      <if test="loginname != null" >
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        ipAddress = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contextpath != null" >
+        contextPath = #{contextpath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestpath != null" >
+        requestPath = #{requestpath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null" >
+        requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null" >
+        methodName = #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodremark != null" >
+        methodRemark = #{methodremark,jdbcType=VARCHAR},
+      </if>
+      <if test="packagepath != null" >
+        packagePath = #{packagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costtime != null" >
+        costTime = #{costtime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ids = #{ids,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsc.entity.SysLog" >
+    update tb_syslog
+    set loginName = #{loginname,jdbcType=VARCHAR},
+      ipAddress = #{ipaddress,jdbcType=VARCHAR},
+      contextPath = #{contextpath,jdbcType=VARCHAR},
+      requestPath = #{requestpath,jdbcType=VARCHAR},
+      requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      methodName = #{methodname,jdbcType=VARCHAR},
+      methodRemark = #{methodremark,jdbcType=VARCHAR},
+      packagePath = #{packagepath,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      costTime = #{costtime,jdbcType=BIGINT}
+    where ids = #{ids,jdbcType=VARCHAR}
+  </update>
+</mapper>

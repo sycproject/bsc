@@ -114,6 +114,17 @@
     <property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
   </bean>
   
+  <!-- 记录日志功能 -->
+  <!-- Spring AOP对普通类的拦截操作 -->
+  <bean id="serviceLog" class="com.bsc.aop.ServiceLog"></bean>
+  <aop:config>
+     <aop:aspect id="service" ref="serviceLog"><!--调用日志类-->
+     <aop:pointcut id="logService" expression="execution(* com.bsc.service.*.*(..))"/><!--配置在service包下所有的类在调用之前都会被拦截-->
+     <aop:before pointcut-ref="logService" method="before"/><!--在service包下面所有的类的所有方法被调用之前都调用MyLog中的before方法-->
+     <aop:after pointcut-ref="logService" method="after"/><!--在service包下面所有的类的所有方法被调用之前都调用MyLog中的after方法-->
+     </aop:aspect>
+  </aop:config>
+ 
   
   
 </beans>
