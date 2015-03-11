@@ -1,5 +1,8 @@
 package com.bsc.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
     private Integer id;
 
@@ -12,6 +15,8 @@ public class User {
     private Integer age;
 
     private String gender;
+    
+    private Set<Role> roles = new HashSet<Role>();
 
     public Integer getId() {
         return id;
@@ -60,6 +65,14 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender == null ? null : gender.trim();
     }
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	@Override
 	public String toString() {

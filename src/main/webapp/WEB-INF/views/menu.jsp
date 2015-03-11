@@ -68,6 +68,24 @@
 
 					<b class="arrow"></b>
 				</li>
+				
+				<li class="">
+					<a data-url="page/role" href="${ctx }/sys/index/toUrl#page/role">
+						<i class="menu-icon fa fa-caret-right"></i>
+						角色管理
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+				
+				<li class="">
+					<a data-url="page/right" href="${ctx }/sys/index/toUrl#page/right">
+						<i class="menu-icon fa fa-caret-right"></i>
+						资源管理
+					</a>
+
+					<b class="arrow"></b>
+				</li>
 
 				<li class="">
 					<a data-url="page/datasource" href="${ctx }/sys/index/toUrl#page/datasource">

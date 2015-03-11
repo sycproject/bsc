@@ -1,0 +1,18 @@
+使用Eclipse生成文档（javadoc）的步骤：
+
+1. 在项目列表中按右键，选择Export
+
+2. 在Export对话框中选择java下的javadoc
+
+3. 在Javadoc command:应该选择jdk的bin/javadoc.exe
+
+4. 在destination设置生成文档的保存路径
+
+5. 按finish(完成)提交即可开始生成文档
+
+
+容易发生的问题：
+
+1. “编码 GBK 的不可映射字符” 错误
+
+这是由于javadoc读取你代码文件时编码格式不一致造成的。在上述步骤的第四步后，继续进入到下一步，找到“Extra Javadoc options ..."，在里面加入相关的编码支持，比如你用的是utf-8编码就填上 “ -encoding UTF-8 -charset UTF-8 ”
