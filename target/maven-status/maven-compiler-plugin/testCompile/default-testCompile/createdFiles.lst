@@ -1,1 +1,11 @@
+com\bsc\test\service\TestResourcesService.class
+com\bsc\test\WindowsInfoUtil.class
+com\bsc\test\SimpleTest.class
+com\bsc\test\JvmTools.class
+com\bsc\test\action\TestUserController.class
+com\bsc\test\aop\Test.class
+com\bsc\test\aop\MyLog.class
+com\bsc\test\TestOutput.class
+com\bsc\test\SystemInfo.class
 com\bsc\test\TestMyBatis.class
+com\bsc\test\action\JUnitActionBase.class
