@@ -19,6 +19,10 @@ import com.bsc.utils.ResourceUtil;
 @Component("collectResource") 
 public class CollectResourceTaskJob {
 	
+	public CollectResourceTaskJob(){
+		System.out.println("task.....................................");
+	}
+	
 	@Resource(name="resourcesService")
 	private ResourcesService resourcesService;
 	

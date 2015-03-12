@@ -28,7 +28,7 @@
   	<!-- 排除扫描@controller类，因为在spring-mvc中已经被扫描过了 -->
   	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
   </context:component-scan>
-  <context:component-scan base-package="com.bsc.dao,com.bsc.service" />
+  <context:component-scan base-package="com.bsc.dao,com.bsc.service,com.bsc.task" />
   
   <!-- （task任务扫描注解）支持异步方法执行 -->
   <task:annotation-driven />
