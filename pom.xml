@@ -77,6 +77,14 @@
 		<version>${org.springframework-version}</version>
 	</dependency>
 	
+	<!--swagger  REST API create tools  -->
+    <dependency>
+		<groupId>com.mangofactory</groupId>
+		<artifactId>swagger-springmvc</artifactId>
+		<version>0.9.5</version>
+	</dependency>	
+	<!--swagger  REST API create tools  -->
+	
 	<!-- Spring websocket -->
 	<!-- <dependency>
 		<groupId>org.springframework</groupId>

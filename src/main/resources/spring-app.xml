@@ -24,10 +24,11 @@
   <!-- 数据库和事务配置 -->
   <context:property-placeholder location="classpath:system-config.properties"/>
   <!-- 自动扫描(自动注入) -->
-  <context:component-scan base-package="com.bsc" >
+  <context:component-scan base-package="com.bsc.common" >
   	<!-- 排除扫描@controller类，因为在spring-mvc中已经被扫描过了 -->
   	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
   </context:component-scan>
+  <context:component-scan base-package="com.bsc.dao,com.bsc.service" />
   
   <!-- （task任务扫描注解）支持异步方法执行 -->
   <task:annotation-driven />

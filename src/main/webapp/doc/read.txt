@@ -1,0 +1,13 @@
+项目部署路径：
+
+数据库：Mysql
+lwthealthy.sql
+
+
+首页
+http://localhost:8080/SpringMyBatis/
+
+REST API 接口
+http://localhost:8080/SpringMyBatis/index.html
+
+
