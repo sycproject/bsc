@@ -1,0 +1,18 @@
+mybatis生成工具
+
+注意：
+	1.当使用自动生成工具生成oralce对应表的时候，一定要注意表名称一定要大写，否则会报错
+	2.驱动jar包的位置，最好用绝对路径
+
+1.使用Eclipse插件自动生成代码（注意：targetProject 需要添加项目名称）
+
+2.maven生成工具生成代码（生成完整后需要刷新一下）
+	要求：maven插件，maven中的配置
+	命令：mvn mybatis-generator:generate运行成功执行或者添加指定参数：mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+	注意：
+	默认选项中没有我们想要执行的Maven命令怎么办？默认带有mvn test，但我们想执行mvn clean test
+	选择Maven buid… 以自定义Maven运行命令，在弹出对话框中的Goals一项中输入我们想要执行的命令，如clean test，设置一下Name，点击Run即可
+	下一次我们选择Maven build，或者使用快捷键Alt + Shift + X, M快速执行Maven构建的时候，上次的配置直接就能在历史记录中找到
+3.通过命令行来运行：
+	要求：需要两个文件---------->mybatis-generator-core-1.3.2.jar和generatorConfig.xml
+	命令：java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -overwrite
